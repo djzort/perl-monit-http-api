@@ -1,5 +1,8 @@
 Revision history for Monit::HTTP
 
+0.04    19 December 2018
+        - Various adjustments
+
 0.03    10 February 2016
         - Rework constants
         - Convert to Dist::Zilla
