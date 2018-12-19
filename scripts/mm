@@ -57,10 +57,10 @@ sub read_cfg {
 
     my $file;
 
-    if( -r $ENV{'HOME'}."/.mm.conf.yml") { $f = $ENV{'HOME'}."/.mm.conf.yml"; }
-    elsif( -r "/etc/mm.conf.yml") { $f = "/etc/mm.conf.yml"; }
-    elsif( -r "$FindBin::RealBin/mm.conf.yml")
-        { $f = "$FindBin::RealBin/mm.conf.yml"; }
+    if( -r $ENV{'HOME'}."/.mm.yml") { $f = $ENV{'HOME'}."/.mm.conf.yml"; }
+    elsif( -r "/etc/mm.yml") { $f = "/etc/mm.conf.yml"; }
+    elsif( -r "$FindBin::RealBin/mm.yml")
+        { $f = "$FindBin::RealBin/mm.yml"; }
 
     open (TEST, $f);
     $file .= $_ while(<TEST>);
@@ -259,7 +259,7 @@ __END__
 
 =head1 NAME
 
-mm - a CLI to manage a cluster of monit daemons
+mm - a CLI to manage a cluster of Monit daemons
 
 =head1 SYNOPSIS
 
@@ -271,11 +271,11 @@ mm [options] [<command>] all|SERVICE..
                          provided hosts must be defined in the config file
         -N               output for non-humans
         -D,              debug output
-        -c,              configuration file (default: ~/.mm.conf.yml)
+        -c,              configuration file (default: ~/.mm.yml)
                          mm will look also in these location in order of priority:
-                            - ~/.mm.conf.yml
-                            - /etc/mm.conf.yml
-                            - /path/of/mm/mm.conf.yml
+                            - ~/.mm.yml
+                            - /etc/mm.yml
+                            - /path/of/mm/mm.yml
 
     command:
 
@@ -289,23 +289,23 @@ mm [options] [<command>] all|SERVICE..
 
 =head1 DESCRIPTION
 
-C<mm> is a CLI tool to talk with a bunch of monit daemons in your network.
-The monit daemon currently implements a HTTP web interface that the
-user can use to manage the monit daemon currently running on that
+C<mm> is a CLI tool to talk with a bunch of Monit daemons in your network.
+The Monit daemon currently implements a HTTP web interface that the
+user can use to manage the Monit daemon currently running on that
 particular host.
 however, if you have a bunch of server out there on your network, and
 you want to manage all of them you are forced to connect to different
 URLs (one per server).
-I came up with this mm tool (mm stays for monit managemenent). You can
-use this command to perform actions across your monit instances.
-All you need to do i setting up your mm.conf.yml file with the hostnames
+I came up with this mm tool (mm stays for Monit management). You can
+use this command to perform actions across your Monit instances.
+All you need to do i setting up your mm.yml file with the hostnames
 and access account.
 
 Enjoy!
 
 =head1 SEE ALSO
 
-The monit project home page
+The Monit project home page
 
 =head1 AUTHOR
 
