@@ -279,7 +279,7 @@ B<FYI> The values above are the default values in case no argument
 is passed to the constructor.
 
 If I<use_auth> is equal to 1 (true) and username and password are not null the http
-request will be peformed using those usernames and password (basic http auth).
+request will be performed using those usernames and password (basic HTTP authentication).
 Be aware that if you provide username and password and you don't set
 I<use_auth> to be 1 authentication won't work.
 
@@ -323,7 +323,9 @@ sub _generate_url {
 
 =head2 C<$monit-E<gt>set_hostname($hostname)>
 
-Set the hostname of the monit instance
+=for stopwords monit
+
+Set the hostname of the Monit instance
 
 =cut
 
@@ -336,7 +338,9 @@ sub set_hostname {
 
 =head2 C<$monit-E<gt>set_port($port)>
 
-Set the tcp port of the monit instance
+=for stopwords TCP
+
+Set the TCP port of the Monit instance
 
 =cut
 
@@ -413,7 +417,7 @@ sub _fetch_info {
 
 Return an array of services configured on the remote monit daemon.
 
-In case of any exepction an error is thrown and undef is returned.
+In case of any exception an error is thrown and undef is returned.
 
 =cut
 
@@ -437,7 +441,7 @@ sub get_services {
 
 =head2 C<$res = $monit-E<gt>_set_xml($xml)>
 
-Private method to set raw xml data.
+Private method to set raw XML data.
 Called from L</_fetch_info>
 
 =cut
@@ -449,7 +453,7 @@ sub _set_xml {
 
 =head2 C<$res = $monit-E<gt>_get_xml($xml)>
 
-Private method to get raw xml data.
+Private method to get raw XML data.
 Called from L</_fetch_info>
 
 =cut
@@ -590,6 +594,8 @@ You can also look for information at:
 =item * RT: CPAN's request tracker
 
 L<http://rt.cpan.org/NoAuth/Bugs.html?Dist=Monit-HTTP-API>
+
+=for stopwords AnnoCPAN
 
 =item * AnnoCPAN: Annotated CPAN documentation
 
