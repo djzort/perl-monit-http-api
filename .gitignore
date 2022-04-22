@@ -6,3 +6,5 @@ pm_to_blib
 blib/
 *.swp
 .build/
+Monit-HTTP*/
+Monit-HTTP*gz
