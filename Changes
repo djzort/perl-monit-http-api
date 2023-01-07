@@ -1,6 +1,6 @@
 Revision history for Monit::HTTP
 
-PENDING
+0.06    6 Jan 2023
         - Change lincense to MIT GH#1
 
 0.05    21 April 2022
