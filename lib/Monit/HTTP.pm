@@ -23,6 +23,9 @@ our (
     %MONIT_MONITOR_REV,
 );
 
+my $STATUS_URL_TEMPLATE = 'http://%s%s:%d/_status?format=xml';
+my $COMMAND_URL_TEMPLATE = 'http://%s:%d/%s';
+
 BEGIN {
 
 %MONIT_ACTIONS_REV = (
@@ -114,7 +117,7 @@ Exporter::export_ok_tags( keys %EXPORT_TAGS );
 
  use Monit::HTTP;
 
- # Use defaults to authenticate
+ # Use Monits default user and password to authenticate
  my $monit = Monit::HTTP->new( use_auth => 1 );
 
  # Or specify what you need (defaults displayed)
@@ -127,7 +130,7 @@ Exporter::export_ok_tags( keys %EXPORT_TAGS );
             );
 
  # list processes
- my @processes = $hd->get_services();
+ my @processes = $monit->get_services();
 
 =head1 DESCRIPTION
 
@@ -135,6 +138,7 @@ This module exposes an interface to talk with Monit via its HTTP interface.
 You can use it to get the status of all the monitored services on that particular
 host such as CPU and Memory usage, current PID, parent PID, current running status,
 current monitoring status and so on.
+
 The module can be used also for performing actions like:
 
 =head1 COMMON USE CASES
@@ -298,7 +302,7 @@ sub new {
     $self->{hostname} ||= 'localhost';
     $self->{port} ||= 2812;
     $self->{use_auth} ||= 0;
-    if($self->{use_auth}) {
+    if ($self->{use_auth}) {
         $self->{username} ||= 'admin';
         $self->{password} ||= 'monit';
     }
@@ -318,7 +322,7 @@ sub _generate_url {
         $auth = sprintf('%s:%s@',$self->{username},$self->{password})
     }
 
-    $self->{status_url} = sprintf('http://%s%s:%d/_status?format=xml',
+    $self->{status_url} = sprintf($STATUS_URL_TEMPLATE,
                                $auth, $self->{hostname}, $self->{port});
 }
 
@@ -354,7 +358,7 @@ sub set_port {
 
 =head2 C<$monit-E<gt>set_username($username)>
 
-Set the username to be used in thee basic http authentication
+Set the username to be used in the basic http authentication
 
 =cut
 
@@ -367,7 +371,7 @@ sub set_username {
 
 =head2 C<$monit-E<gt>set_password($password)>
 
-Set the password to be used in thee basic http authentication
+Set the password to be used in the basic http authentication
 
 =cut
 
@@ -538,7 +542,7 @@ sub service_status {
     }
 
     croak "Service $service does not exist\n"
-        unless scalar keys %$status_href;
+        unless scalar keys %{$status_href};
 
     return $status_href
 
@@ -566,7 +570,7 @@ sub command_run {
 
     # if services does not exist throw error
 
-    my $url = 'http://'.$self->{hostname}.':'.$self->{port}.'/'.$service;
+    my $url = sprintf($COMMAND_URL_TEMPLATE, $self->{hostname}, $self->{port}, $service);
 
     my $res = $self->{ua}->post_form($url, { action => $command });
     croak $res->{status}
